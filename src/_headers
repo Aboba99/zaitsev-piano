@@ -1,0 +1,16 @@
+# Заголовки безопасности для Netlify.
+# CSP для публичных страниц задана тегом <meta> в src/_includes/base.njk,
+# чтобы не мешать админке /admin/ (ей нужны скрипты с unpkg и API GitHub).
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+/logo.html
+  X-Robots-Tag: noindex
+
+/admin/*
+  X-Robots-Tag: noindex
+  Cache-Control: no-store

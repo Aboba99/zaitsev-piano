@@ -1,0 +1,4 @@
+/* Инструкция для владельца (/admin/help.html) */
+.help { padding-bottom: 64px; }
+.help__block { padding: 28px 0; border-top: 1px solid var(--line); max-width: 72ch; }
+.help code { font-family: inherit; font-weight: 600; background: var(--paper); border: 1px solid var(--line); padding: 1px 6px; border-radius: 3px; white-space: nowrap; }

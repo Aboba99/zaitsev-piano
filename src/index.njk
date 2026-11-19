@@ -1,0 +1,134 @@
+---
+layout: base.njk
+permalink: /index.html
+title: Настройка пианино и роялей в Нижнем Новгороде — Мастерская Зайцева
+ogTitle: Мастерская Зайцева — настройка пианино в Нижнем Новгороде
+description: "Настройщик Аркадий Львович Зайцев: 36 лет стажа, 19 из них в Нижегородской филармонии. Настройка пианино и роялей, осмотр перед покупкой, восстановленные пианино. Выезд по городу и области."
+---
+{%- set tel = settings.phone | digits -%}
+{%- set wa = settings.whatsapp | digits -%}
+{%- set p0 = prices.items[0] -%}{%- set p1 = prices.items[1] -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Мастерская Зайцева",
+  "description": "Настройка и ремонт пианино и роялей, продажа восстановленных инструментов",
+  "founder": { "@type": "Person", "name": "Аркадий Львович Зайцев" },
+  "telephone": "+{{ tel }}",
+  "address": { "@type": "PostalAddress", "streetAddress": "{{ settings.workshop_address }}", "addressLocality": "Нижний Новгород", "addressCountry": "RU" },
+  "areaServed": ["Нижний Новгород", "Нижегородская область"],
+  "openingHours": "Mo-Sa 09:00-19:00"
+}
+</script>
+
+  <!-- Крышка клавиатуры с именем мастерской, как надпись фабрики на пианино -->
+  <div class="fallboard" role="img" aria-label="Мастерская Зайцева, с 1990 года">
+    <svg class="fallboard__logo" viewBox="0 0 460 180" aria-hidden="true">
+      <text x="230" y="38" text-anchor="middle" font-family="Golos Text, system-ui, sans-serif" font-size="17" letter-spacing="7" fill="#D4B26A">мастерская</text>
+      <text x="230" y="124" text-anchor="middle" font-family="Alice, Georgia, serif" font-size="92" fill="#D4B26A">Зайцева</text>
+      <line x1="58" y1="158" x2="168" y2="158" stroke="#D4B26A" stroke-width="1"/>
+      <text x="230" y="164" text-anchor="middle" font-family="Alice, Georgia, serif" font-size="17" fill="#D4B26A">с 1990 года</text>
+      <line x1="292" y1="158" x2="402" y2="158" stroke="#D4B26A" stroke-width="1"/>
+    </svg>
+  </div>
+  <div class="keys" aria-hidden="true"></div>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>Настройка пианино и роялей в&nbsp;Нижнем Новгороде и&nbsp;области</h1>
+      <p class="hero__lead">Меня зовут Аркадий Львович Зайцев. Настраиваю инструменты 36&nbsp;лет, из них 19 проработал в&nbsp;Нижегородской филармонии. Работаю один и&nbsp;приезжаю сам.</p>
+      <p class="hero__prices"><span>Пианино — {{ p0.price }}.</span> <span>Рояль — {{ p1.price }}.</span></p>
+      <div class="actions">
+        <a class="btn" href="tel:+{{ tel }}">Позвонить</a>
+        <a class="btn btn--quiet" href="https://wa.me/{{ wa }}">Написать в WhatsApp</a>
+      </div>
+      <p class="hero__hours">{{ settings.hours_short }}</p>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="why">
+    <div class="wrap two-col">
+      <div class="prose">
+        <h2 id="why">Почему настройка занимает полтора-два часа</h2>
+        <p>В пианино больше двухсот струн. На большинство клавиш приходится по две-три струны, и каждую нужно подтянуть так, чтобы она звучала вместе с&nbsp;соседними.</p>
+        <p>За полчаса можно поправить самые заметные ноты, но строй уйдёт через пару недель. Я настраиваю весь инструмент целиком и заодно проверяю, как работают клавиши, молоточки и педали. Если что-то нужно чинить, скажу сразу, а если ещё можно играть, так и&nbsp;скажу.</p>
+        <p>Поэтому цена указана за настройку, а не за время. Если где-то предлагают быстрее и дешевле, просто спросите, что входит в&nbsp;работу.</p>
+      </div>
+      <div class="prose">
+        <h2>Как часто настраивать</h2>
+        <ul class="plain-list">
+          <li>Раз-два в год, если на инструменте играют.</li>
+          <li>После переезда, когда пианино постоит на новом месте пару недель.</li>
+          <li>Осенью, когда включают отопление, и весной, когда отключают. Сухой воздух сбивает строй сильнее&nbsp;всего.</li>
+          <li>Если инструмент не настраивали пять лет и больше, строй поднимают постепенно. Иногда это два&nbsp;визита.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="osmotr">
+    <div class="wrap">
+      <div class="callout">
+        <h2 id="osmotr">Покупаете пианино с рук? Сначала позовите меня</h2>
+        {%- for item in prices.items %}{% if item.accent %}
+        <p class="callout__price">{{ item.name }} — {{ item.price }}</p>
+        {%- endif %}{% endfor %}
+        <p>Треснувшую деку или разбитый вирбельбанк, в котором держатся колки, на фото не видно. Такой ремонт часто стоит больше, чем сам инструмент. Лучше заплатить за осмотр до покупки, чем потом узнать, что пианино не держит строй.</p>
+        <div class="actions">
+          <a class="btn" href="tel:+{{ tel }}">Позвонить, договориться об осмотре</a>
+        </div>
+        <p class="bridge">Не хотите рисковать с объявлениями? <a href="/prodazha.html">У меня есть проверенные инструменты</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="ceny">
+    <div class="wrap">
+      <h2 id="ceny">Основные цены</h2>
+      <ul class="pricelist">
+        {%- for item in prices.items %}{% if item.on_home %}
+        <li class="price-row{% if item.accent %} price-row--accent{% endif %}">
+          <div class="price-row__main"><span class="price-row__name">{{ item.name }}</span><span class="price-row__dots" aria-hidden="true"></span><span class="price-row__value">{{ item.price }}</span></div>
+        </li>
+        {%- endif %}{% endfor %}
+      </ul>
+      <p class="more-link"><a href="/ceny.html">Все цены: ремонт, выезд за город, вывоз старого пианино</a></p>
+    </div>
+  </section>
+
+  {%- set onSale = [] %}
+  {%- for p in collections.pianos %}{% if not p.data.sold %}{% set onSale = (onSale.push(p), onSale) %}{% endif %}{% endfor %}
+  <section class="section" aria-labelledby="prodazha">
+    <div class="wrap prose">
+      <h2 id="prodazha">Пианино, которые я восстановил сам</h2>
+      <p>В мастерской на {{ settings.workshop_address }} стоят инструменты, которые я перебрал своими руками. К каждому — бесплатная настройка после доставки и год гарантии на механику.</p>
+      {%- if onSale.length %}
+      <ul class="mini-list">
+        {%- for p in onSale %}
+        <li>{{ p.data.title }}{% if p.data.subtitle %}, {{ p.data.subtitle | lower }}{% endif %}<span class="price-row__dots" aria-hidden="true"></span><b>{{ p.data.price | rub }}</b></li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+      <p>Приехать послушать можно по договорённости: позвоните. Если ищете пианино ребёнку к Новому году, звоните&nbsp;заранее.</p>
+      <a class="btn btn--quiet" href="/prodazha.html">Посмотреть инструменты</a>
+    </div>
+  </section>
+
+  <section class="section section--paper" aria-labelledby="otzyvy">
+    <div class="wrap">
+      <h2 id="otzyvy">Что пишут на Авито</h2>
+      <p class="muted">{{ reviews.summary }}</p>
+      <div class="reviews">
+        {%- for r in reviews.items %}
+        <blockquote class="review">
+          <p>«{{ r.text }}»</p>
+          <footer>{{ r.author }}</footer>
+        </blockquote>
+        {%- endfor %}
+      </div>
+      {%- if settings.avito_url %}
+      <p class="more-link"><a href="{{ settings.avito_url }}">Все отзывы на Авито</a></p>
+      {%- endif %}
+    </div>
+  </section>

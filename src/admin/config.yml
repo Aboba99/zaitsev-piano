@@ -1,0 +1,116 @@
+# Админка сайта «Мастерская Зайцева» (Decap CMS)
+# Вход: https://<адрес сайта>/admin/ через аккаунт GitHub с доступом к репозиторию.
+backend:
+  name: github
+  repo: Aboba99/zaitsev-piano
+  branch: main
+  commit_messages:
+    create: "Добавлено: {{collection}} «{{slug}}»"
+    update: "Изменено: {{collection}} «{{slug}}»"
+    delete: "Удалено: {{collection}} «{{slug}}»"
+    uploadMedia: "Загружено фото {{path}}"
+    deleteMedia: "Удалено фото {{path}}"
+
+locale: ru
+logo_url: /img/favicon.svg
+site_url: https://rainbow-begonia-0c5e54.netlify.app
+display_url: https://rainbow-begonia-0c5e54.netlify.app
+
+media_folder: src/img/uploads
+public_folder: /img/uploads
+
+collections:
+  - name: pianos
+    label: Пианино в продаже
+    label_singular: пианино
+    description: "Инструменты на странице «Пианино в продаже» и в списке на главной. Проданное можно отметить галочкой «Продано» или удалить."
+    folder: src/pianos
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{fields.title}}"
+    identifier_field: title
+    summary: "{{title}} — {{price}} ₽"
+    sortable_fields: [order, title, price]
+    fields:
+      - { name: title, label: "Название", widget: string, hint: "Например: «Красный Октябрь» или Petrof" }
+      - { name: subtitle, label: "Год, страна или пометка", widget: string, required: false, hint: "Например: 1985 год, Чехия" }
+      - { name: price, label: "Цена, ₽", widget: number, value_type: int, min: 0, hint: "Только число, без пробелов и ₽. Например: 45000" }
+      - { name: photo, label: "Фото", widget: image, required: false, choose_url: false, hint: "Лучше горизонтальное. Можно прямо с телефона, сайт сам уменьшит." }
+      - { name: description, label: "Короткое описание", widget: text, required: false }
+      - { name: quote, label: "Цитата мастера (курсивом)", widget: text, required: false }
+      - { name: done, label: "Что сделано", widget: text, required: false, hint: "Какие детали меняли: молоточки, сукна, струны…" }
+      - { name: condition, label: "Состояние корпуса", widget: text, required: false }
+      - { name: size, label: "Размер и цвет", widget: string, required: false }
+      - { name: sold, label: "Продано", widget: boolean, default: false, required: false, hint: "Включите, когда пианино купили: цена и кнопки скроются" }
+      - { name: order, label: "Порядок в списке", widget: number, value_type: int, default: 10, required: false, hint: "Меньше число — выше в списке" }
+
+  - name: content
+    label: Цены, контакты, отзывы, фото
+    delete: false
+    editor: { preview: false }
+    files:
+      - name: prices
+        label: Цены на услуги
+        file: src/_data/prices.json
+        fields:
+          - name: items
+            label: Услуги
+            label_singular: услугу
+            widget: list
+            summary: "{{fields.name}} — {{fields.price}}"
+            fields:
+              - { name: name, label: "Услуга", widget: string }
+              - { name: price, label: "Цена", widget: string, hint: "Как показывать на сайте: «3 500 ₽», «+500 ₽», «1 000–4 000 ₽»" }
+              - { name: note, label: "Пояснение", widget: text, required: false }
+              - { name: on_home, label: "Показывать на главной", widget: boolean, default: false, required: false }
+              - { name: accent, label: "Выделить (осмотр перед покупкой)", widget: boolean, default: false, required: false }
+
+      - name: master
+        label: Фото мастера и кота
+        file: src/_data/master.json
+        fields:
+          - { name: portrait, label: "Главное фото мастера", widget: image, required: false, choose_url: false, hint: "Вертикальное фото, страница «О мастере»" }
+          - name: work_photos
+            label: Фото за работой
+            label_singular: фото
+            widget: list
+            summary: "{{fields.caption}}"
+            fields:
+              - { name: image, label: "Фото", widget: image, required: false, choose_url: false }
+              - { name: caption, label: "Подпись", widget: string, required: false }
+              - { name: placeholder, label: "Текст, пока фото нет", widget: string, required: false }
+          - { name: cat_photo, label: "Фото кота", widget: image, required: false, choose_url: false }
+          - { name: cat_name, label: "Имя кота", widget: string, required: false, hint: "Если стереть, блок с котом пропадёт" }
+          - { name: cat_text, label: "Текст про кота", widget: text, required: false }
+
+      - name: settings
+        label: Контакты и часы работы
+        file: src/_data/settings.json
+        fields:
+          - { name: phone, label: "Телефон", widget: string, hint: "В формате +7 (912) 345-67-89" }
+          - { name: whatsapp, label: "Номер WhatsApp", widget: string, hint: "Обычно тот же, что телефон" }
+          - { name: telegram_url, label: "Ссылка на Телеграм", widget: string, required: false, hint: "Например: https://t.me/имя. Пусто — кнопки Телеграма не будет" }
+          - { name: telegram_note, label: "Кто отвечает в Телеграме", widget: string, required: false }
+          - { name: avito_url, label: "Ссылка на профиль Авито", widget: string, required: false, hint: "Пусто — ссылки «Все отзывы на Авито» не будет" }
+          - { name: hours, label: "Часы работы (подвал сайта)", widget: string }
+          - { name: hours_short, label: "Часы работы (под кнопками на главной)", widget: string }
+          - { name: day_off, label: "Выходной", widget: string }
+          - { name: area, label: "Где работаю", widget: string }
+          - { name: workshop_address, label: "Адрес мастерской", widget: string }
+          - { name: workshop_note, label: "Заметка про мастерскую", widget: string, required: false, hint: "Например: Открывается в январе. Пусто — ничего не пишется" }
+
+      - name: reviews
+        label: Отзывы
+        file: src/_data/reviews.json
+        fields:
+          - { name: summary, label: "Строка над отзывами", widget: string, hint: "Например: 23 отзыва, все на пять звёзд" }
+          - name: items
+            label: Отзывы
+            label_singular: отзыв
+            widget: list
+            summary: "{{fields.author}}"
+            fields:
+              - { name: text, label: "Текст отзыва (без кавычек)", widget: text }
+              - { name: author, label: "Кто написал", widget: string }

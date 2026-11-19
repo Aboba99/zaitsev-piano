@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO: replace https://example.ru/ with the real domain before deploy -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://example.ru/</loc></url>
+  <url><loc>https://example.ru/ceny.html</loc></url>
+  <url><loc>https://example.ru/prodazha.html</loc></url>
+  <url><loc>https://example.ru/master.html</loc></url>
+</urlset>

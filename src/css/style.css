@@ -1,0 +1,367 @@
+/* Мастерская Зайцева — «старое дерево и слоновая кость».
+   Одна смелая деталь — крышка клавиатуры с латунной надписью в шапке главной.
+   Всё остальное тихое: левое выравнивание, узкая колонка текста, прейскурант с отточиями. */
+
+:root {
+  --ivory: #F3ECDD;        /* фон: пожелтевшая слоновая кость клавиш */
+  --paper: #FAF6EE;        /* светлые вставки */
+  --ebony: #1E1612;        /* чёрные клавиши, тёмное дерево */
+  --walnut: #4A3226;       /* орех, основной тёмный */
+  --walnut-2: #5C4030;
+  --mahogany: #7A2E22;     /* красное дерево / сукно молоточков — кнопки */
+  --mahogany-dark: #5E2219;
+  --brass: #84602A;        /* латунь — тонкие детали на светлом (тёмная, для контраста 4.5:1) */
+  --brass-light: #D4B26A;  /* латунь на тёмном */
+  --text: #2A1E17;
+  --muted: #65544A;
+  --line: #D8CAB0;
+
+  --font-display: "Alice", Georgia, "Times New Roman", serif;
+  --font-body: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --wrap: 1120px;
+  --measure: 64ch;
+  --gutter: clamp(16px, 4vw, 40px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.125rem;          /* 18px */
+  line-height: 1.6;
+}
+
+img, svg { display: block; max-width: 100%; height: auto; }
+
+a { color: var(--mahogany); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { color: var(--mahogany-dark); text-decoration-thickness: 2px; }
+
+:focus-visible { outline: 3px solid var(--brass); outline-offset: 3px; border-radius: 2px; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--walnut);
+  margin: 0 0 0.6em;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2rem, 4.6vw, 3.25rem); }
+h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+h3 { font-size: 1.35rem; }
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.prose { max-width: var(--measure); }
+.wrap.prose { max-width: var(--wrap); }          /* держим левый край сетки, узкой делаем только колонку текста */
+.wrap.prose > * { max-width: var(--measure); }
+.muted { color: var(--muted); }
+
+.skip-link {
+  position: absolute; left: 8px; top: -60px;
+  background: var(--ebony); color: var(--paper); padding: 8px 14px; z-index: 10;
+}
+.skip-link:focus { top: 8px; }
+
+/* ---------- Шапка ---------- */
+
+.site-header { border-bottom: 1px solid var(--line); background: var(--ivory); }
+.site-header .wrap {
+  display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;
+  padding-top: 14px; padding-bottom: 14px;
+}
+.brand { display: inline-flex; flex-direction: column; text-decoration: none; color: var(--walnut); line-height: 1; }
+.brand:hover { color: var(--walnut); }
+.brand__small { font-family: var(--font-body); font-size: 0.78rem; letter-spacing: 0.14em; color: var(--brass); margin-bottom: 4px; }
+.brand__name { font-family: var(--font-display); font-size: 1.6rem; }
+
+.nav { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-right: auto; }
+.nav a { color: var(--text); text-decoration: none; font-size: 1rem; padding: 6px 0; border-bottom: 2px solid transparent; }
+.nav a:hover { border-bottom-color: var(--brass); color: var(--text); }
+.nav a[aria-current="page"] { border-bottom-color: var(--mahogany); }
+
+.header-phone { font-weight: 600; color: var(--walnut); text-decoration: none; white-space: nowrap; }
+.header-phone:hover { color: var(--mahogany); }
+
+@media (max-width: 760px) {
+  .site-header .wrap { justify-content: space-between; }
+  .nav { order: 3; width: 100%; margin-right: 0; gap: 2px 18px; }
+  .nav a { font-size: 0.95rem; }
+}
+
+/* ---------- Крышка клавиатуры (главная) ---------- */
+
+.fallboard {
+  position: relative;
+  background:
+    repeating-linear-gradient(92deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 9px, rgba(0,0,0,0.05) 9px 11px, transparent 11px 23px),
+    linear-gradient(180deg, #3A271D 0%, #2A1C15 55%, #1E1612 100%);
+  color: var(--brass-light);
+  text-align: center;
+  padding: clamp(40px, 7vw, 76px) var(--gutter) clamp(32px, 5vw, 52px);
+  box-shadow: inset 0 -10px 18px rgba(0,0,0,0.45), inset 0 2px 0 rgba(255,255,255,0.06);
+}
+.fallboard__logo { margin: 0 auto; width: min(460px, 86%); }
+
+.keys {
+  height: clamp(56px, 9vw, 104px);
+  background-color: var(--ivory);
+  background-image: url("../img/keys.svg");
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-position: center top;
+  border-top: 4px solid #120D0A;
+  box-shadow: inset 0 6px 8px rgba(0,0,0,0.18);
+}
+
+/* ---------- Первый экран под крышкой ---------- */
+
+.hero { padding: clamp(36px, 6vw, 72px) 0 clamp(40px, 6vw, 64px); }
+.hero__lead { font-size: 1.25rem; max-width: 56ch; }
+.hero__prices { font-family: var(--font-display); font-size: clamp(1.3rem, 2.4vw, 1.6rem); color: var(--walnut); margin: 1.2em 0; }
+.hero__prices span { white-space: nowrap; }
+.hero__hours { font-size: 0.95rem; color: var(--muted); margin-top: 14px; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.btn {
+  display: inline-block;
+  padding: 14px 24px;
+  border-radius: 3px;
+  background: var(--mahogany);
+  color: var(--paper);
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  border: 2px solid var(--mahogany);
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+.btn:hover { background: var(--mahogany-dark); border-color: var(--mahogany-dark); color: var(--paper); }
+.btn--quiet { background: transparent; color: var(--walnut); border-color: var(--walnut); }
+.btn--quiet:hover { background: var(--walnut); color: var(--paper); border-color: var(--walnut); }
+
+/* ---------- Секции ---------- */
+
+.section { padding: clamp(44px, 7vw, 80px) 0; border-top: 1px solid var(--line); }
+.section--paper { background: var(--paper); }
+
+.two-col { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+@media (max-width: 860px) { .two-col { grid-template-columns: 1fr; } }
+
+.plain-list { margin: 0 0 1em; padding-left: 1.1em; }
+.plain-list li { margin-bottom: 0.5em; }
+.plain-list li::marker { color: var(--brass); }
+
+/* Настоящая последовательность — поэтому с номерами */
+.steps { list-style: none; counter-reset: step; padding: 0; margin: 0; max-width: var(--measure); }
+.steps li { counter-increment: step; position: relative; padding: 0 0 18px 52px; }
+.steps li::before {
+  content: counter(step);
+  position: absolute; left: 0; top: -2px;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--brass); color: var(--walnut);
+  font-family: var(--font-display); font-size: 1.1rem;
+  display: grid; place-items: center;
+}
+.steps strong { display: block; color: var(--walnut); }
+
+/* Выделенный совет (осмотр перед покупкой) */
+.callout {
+  border: 1px solid var(--brass);
+  outline: 1px solid var(--line);
+  outline-offset: 5px;          /* двойная тонкая рамка, как на старой этикетке */
+  background: var(--paper);
+  padding: 26px 30px;
+  max-width: var(--measure);
+}
+.section--paper .callout { background: var(--ivory); }
+.callout__price { font-family: var(--font-display); font-size: 1.5rem; color: var(--mahogany); margin-bottom: 0.4em; }
+
+/* ---------- Прейскурант с отточиями ---------- */
+
+.pricelist { margin: 0; padding: 0; max-width: 820px; list-style: none; }
+.price-row { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.price-row__main { display: flex; align-items: baseline; gap: 10px; }
+.price-row__name { font-size: 1.1rem; }
+.price-row__dots { flex: 1; border-bottom: 2px dotted var(--line); transform: translateY(-5px); min-width: 24px; }
+.price-row__value { font-family: var(--font-display); font-size: 1.35rem; color: var(--walnut); white-space: nowrap; }
+.price-row__note { margin: 4px 0 0; font-size: 0.95rem; color: var(--muted); max-width: 60ch; }
+.price-row--accent .price-row__name { font-weight: 600; }
+.more-link { margin-top: 22px; }
+.price-row--accent .price-row__value { color: var(--mahogany); }
+
+@media (max-width: 520px) {
+  .price-row__dots { display: none; }
+}
+
+/* ---------- Отзывы ---------- */
+
+.reviews { display: grid; gap: 28px; max-width: 760px; }
+.review { margin: 0; padding-left: 22px; border-left: 2px solid var(--brass); }
+.review p { font-size: 1.15rem; margin-bottom: 0.4em; }
+.review footer { color: var(--muted); font-size: 0.95rem; }
+
+/* ---------- Инструменты в продаже ---------- */
+
+.instruments { display: grid; gap: 0; }
+.instrument {
+  display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 48px);
+  padding: 32px 0; border-bottom: 1px solid var(--line);
+}
+.instrument:first-child { padding-top: 0; }
+.instrument h2 { margin-bottom: 0.2em; }
+.instrument__meta { color: var(--muted); margin-bottom: 0.8em; }
+.instrument__price { font-family: var(--font-display); font-size: 1.7rem; color: var(--mahogany); margin: 0.4em 0 0.6em; }
+.instrument blockquote { margin: 0 0 1em; font-style: italic; color: var(--walnut); }
+@media (max-width: 700px) { .instrument { grid-template-columns: 1fr; } }
+
+.terms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 28px 0 44px; }
+.terms div { padding: 18px 20px 18px 0; }
+.terms div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+.terms strong { display: block; font-family: var(--font-display); font-weight: 400; font-size: 1.25rem; color: var(--walnut); }
+@media (max-width: 760px) {
+  .terms { grid-template-columns: 1fr; }
+  .terms div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+}
+
+/* ---------- Фото (пока заглушки — заменить на реальные снимки) ---------- */
+
+.photo { margin: 0; }
+.photo__frame {
+  aspect-ratio: 4 / 3;
+  background: var(--paper);
+  border: 1px dashed var(--brass);
+  display: grid; place-items: center;
+  padding: 16px; text-align: center;
+  color: var(--muted); font-size: 0.95rem;
+}
+.photo__frame--tall { aspect-ratio: 3 / 4; }
+.photo img { width: 100%; aspect-ratio: inherit; object-fit: cover; }
+.photo figcaption { margin-top: 10px; font-size: 0.95rem; color: var(--muted); }
+
+.gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 760px) { .gallery { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .gallery { grid-template-columns: 1fr; } }
+
+.cat { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(20px, 4vw, 48px); align-items: center; }
+@media (max-width: 760px) { .cat { grid-template-columns: 1fr; } }
+
+/* ---------- Подвал / контакты ---------- */
+
+.site-footer {
+  background:
+    repeating-linear-gradient(92deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 10px, rgba(0,0,0,0.05) 10px 12px, transparent 12px 26px),
+    var(--ebony);
+  color: #E9DFCC;
+  padding: clamp(44px, 7vw, 72px) 0 28px;
+}
+.site-footer h2 { color: var(--brass-light); }
+.site-footer a { color: #F3E6C8; }
+.site-footer a:hover { color: #FFFFFF; }
+.footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 32px; }
+@media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer-phone { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2rem); text-decoration: none; display: inline-block; margin-bottom: 6px; }
+.footer-small { font-size: 0.95rem; color: #CBBDA4; }
+.footer-bottom { margin-top: 40px; padding-top: 18px; border-top: 1px solid rgba(212,178,106,0.25); font-size: 0.875rem; color: #A99A83; }
+.site-footer .btn { background: var(--brass-light); border-color: var(--brass-light); color: var(--ebony); }
+.site-footer .btn:hover { background: #E6C987; border-color: #E6C987; color: var(--ebony); }
+.site-footer .btn--quiet { background: transparent; color: #F3E6C8; border-color: #8C7650; }
+.site-footer .btn--quiet:hover { background: rgba(212,178,106,0.12); color: #FFFFFF; border-color: var(--brass-light); }
+
+.page-head { padding: clamp(40px, 6vw, 64px) 0 clamp(24px, 4vw, 36px); }
+.page-head p { font-size: 1.2rem; max-width: 60ch; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* ---------- Правки после ревью клиента, круг 1 ---------- */
+
+/* Пониже крышка на десктопе, чтобы кнопки влезали в экран ноутбука */
+.fallboard { padding: clamp(24px, 4vw, 44px) var(--gutter) clamp(20px, 3vw, 30px); }
+.fallboard__logo { width: min(380px, 80%); }
+.keys { height: clamp(40px, 6vw, 72px); }
+.hero { padding-top: clamp(28px, 4vw, 48px); }
+
+.hero__hours { font-size: 1.05rem; color: var(--text); margin-top: 16px; }
+
+/* Кнопки внутри выделенного блока и карточек инструментов */
+.callout .actions { margin-top: 6px; }
+.bridge { margin: 18px 0 0; }
+
+.instrument .actions { margin-top: 4px; }
+.specs { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; margin: 0 0 1.2em; font-size: 1rem; }
+.specs dt { color: var(--muted); }
+.specs dd { margin: 0; }
+.specs .todo { color: var(--muted); font-style: italic; }
+
+/* Мини-список инструментов на главной */
+.mini-list { list-style: none; padding: 0; margin: 0 0 1.4em; max-width: 520px; }
+.mini-list li { display: flex; gap: 10px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.mini-list .price-row__dots { transform: translateY(-4px); }
+.mini-list b { font-weight: 400; font-family: var(--font-display); font-size: 1.15rem; color: var(--walnut); white-space: nowrap; }
+
+/* Закреплённая панель звонка — только на телефоне */
+.callbar { display: none; }
+
+@media (max-width: 760px) {
+  .fallboard { padding: 18px var(--gutter) 14px; }
+  .fallboard__logo { width: min(230px, 64%); }
+  .keys { height: 30px; border-top-width: 3px; }
+  .hero { padding: 22px 0 36px; }
+  .hero__lead { font-size: 1.1rem; }
+  .hero__prices { margin: 0.7em 0 0.9em; }
+
+  /* меню в одну строку; контакты есть в нижней панели и в подвале */
+  .nav { flex-wrap: nowrap; gap: 18px; }
+  .nav a[href="#kontakty"] { display: none; }
+  .header-phone { border: 1.5px solid var(--walnut); border-radius: 3px; padding: 8px 12px; font-size: 1rem; }
+
+  body { padding-bottom: 76px; }
+  .callbar {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: var(--ebony);
+    box-shadow: 0 -4px 14px rgba(0,0,0,0.25);
+  }
+  .callbar a {
+    display: block; text-align: center; padding: 14px 8px; border-radius: 3px;
+    font-weight: 600; font-size: 1.05rem; text-decoration: none;
+  }
+  .callbar__call { background: var(--brass-light); color: var(--ebony); }
+  .callbar__wa { border: 1.5px solid #8C7650; color: #F3E6C8; }
+}
+
+/* Цены на телефоне: название и цена в одну строку, пояснение ниже */
+@media (max-width: 520px) {
+  .price-row__main { flex-wrap: nowrap; }
+  .price-row__name { flex: 1 1 auto; }
+  .price-row__value { font-size: 1.2rem; }
+  .specs { grid-template-columns: 1fr; gap: 0; }
+  .specs dd { margin-bottom: 8px; }
+}
+
+/* Круг 2: логотип не дублируем на телефоне, на десктопе крышка ещё ниже */
+.fallboard { padding-top: clamp(18px, 2.6vw, 32px); padding-bottom: clamp(14px, 2vw, 22px); }
+.fallboard__logo { width: min(320px, 70%); }
+@media (max-width: 760px) {
+  .fallboard { display: none; }
+  .keys { height: 22px; border-top-width: 3px; }
+}
+
+/* ---------- Версия с админкой: настоящие фото и отметка «продано» ---------- */
+.photo__img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; display: block; background: var(--paper); }
+.photo__img--tall { aspect-ratio: 3 / 4; }
+.photo picture { display: block; }
+.instrument__sold { font-family: var(--font-display); font-size: 1.4rem; color: var(--muted); margin: 0.4em 0 0.6em; }
+.instrument--sold .photo { opacity: 0.6; }
+.review p, .price-row__note, .photo figcaption, .plain-list li, .steps li { text-wrap: pretty; }

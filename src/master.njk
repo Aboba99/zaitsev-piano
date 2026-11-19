@@ -1,0 +1,50 @@
+---
+layout: base.njk
+permalink: /master.html
+title: О мастере — Аркадий Львович Зайцев, настройщик фортепиано
+ogTitle: О мастере — Мастерская Зайцева
+description: "Аркадий Львович Зайцев: настраивает пианино с 1990 года, 19 лет в Нижегородской филармонии. Работает один, приезжает сам."
+---
+  <div class="page-head">
+    <div class="wrap two-col">
+      <div class="prose">
+        <h1>Аркадий Львович Зайцев</h1>
+        <p>Настраиваю пианино и рояли с 1990 года. Девятнадцать лет из них проработал настройщиком в Нижегородской филармонии.</p>
+        <p>Пишу это не ради хвастовства. Вы пускаете домой незнакомого человека, и вам стоит знать, кто к вам&nbsp;придёт.</p>
+        <p>Сейчас работаю сам. Езжу по городу и области, а в мастерской стоят пианино, которые я восстановил. Работаю один: на звонки отвечаю сам, на настройку тоже приезжаю&nbsp;сам.</p>
+      </div>
+      <figure class="photo">
+        {% photo master.portrait, "Аркадий Львович Зайцев за настройкой", "Фото: Аркадий Львович за настройкой", true %}
+      </figure>
+    </div>
+  </div>
+
+  {%- if master.work_photos.length %}
+  <section class="section section--paper" aria-labelledby="rabota">
+    <div class="wrap">
+      <h2 id="rabota">За работой</h2>
+      <div class="gallery">
+        {%- for ph in master.work_photos %}
+        <figure class="photo">
+          {% photo ph.image, ph.caption, ph.placeholder or "Фото" %}
+          {%- if ph.caption %}<figcaption>{{ ph.caption }}</figcaption>{% endif %}
+        </figure>
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+  {%- endif %}
+
+  {%- if master.cat_name %}
+  <section class="section" aria-labelledby="bemol">
+    <div class="wrap cat">
+      <figure class="photo">
+        {% photo master.cat_photo, "Кот " + master.cat_name, "Фото: " + master.cat_name %}
+      </figure>
+      <div class="prose">
+        <h2 id="bemol">{{ master.cat_name }}</h2>
+        <p>{{ master.cat_text }}</p>
+      </div>
+    </div>
+  </section>
+  {%- endif %}

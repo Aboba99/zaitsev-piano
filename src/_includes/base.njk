@@ -1,0 +1,89 @@
+{%- set tel = settings.phone | digits -%}
+{%- set wa = settings.whatsapp | digits -%}
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ ogTitle or title }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:locale" content="ru_RU">
+  {%- if noindex %}<meta name="robots" content="noindex">{% endif %}
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alice&family=Golos+Text:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  {%- for css in extraCss or [] %}
+  <link rel="stylesheet" href="{{ css }}">
+  {%- endfor %}
+  {%- if jsonld %}
+  <script type="application/ld+json">{{ jsonld | safe }}</script>
+  {%- endif %}
+</head>
+<body>
+<a class="skip-link" href="#main">К содержанию</a>
+
+{%- if not bare %}
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Мастерская Зайцева, на главную">
+      <span class="brand__small">мастерская</span>
+      <span class="brand__name">Зайцева</span>
+    </a>
+    <nav class="nav" aria-label="Разделы сайта">
+      <a href="/ceny.html"{% if page.url == "/ceny.html" %} aria-current="page"{% endif %}>Цены</a>
+      <a href="/prodazha.html"{% if page.url == "/prodazha.html" %} aria-current="page"{% endif %}>Пианино в продаже</a>
+      <a href="/master.html"{% if page.url == "/master.html" %} aria-current="page"{% endif %}>О мастере</a>
+      <a href="#kontakty">Контакты</a>
+    </nav>
+    <a class="header-phone" href="tel:+{{ tel }}">{{ settings.phone }}</a>
+  </div>
+</header>
+{%- endif %}
+
+<main id="main"{% if bare %} class="wrap"{% endif %}>
+{{ content | safe }}
+</main>
+
+{%- if not bare %}
+<footer class="site-footer" id="kontakty">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>Позвоните, договоримся о времени</h2>
+        <a class="footer-phone" href="tel:+{{ tel }}">{{ settings.phone }}</a>
+        <p class="footer-small">На этот же номер можно написать в WhatsApp{% if settings.telegram_url %} и Телеграм{% endif %}. {{ settings.telegram_note }}</p>
+        <div class="actions">
+          <a class="btn" href="https://wa.me/{{ wa }}">WhatsApp</a>
+          {%- if settings.telegram_url %}
+          <a class="btn btn--quiet" href="{{ settings.telegram_url }}">Телеграм</a>
+          {%- endif %}
+        </div>
+      </div>
+      <div>
+        <h2>Когда</h2>
+        <p>{{ settings.hours }}</p>
+        <p class="footer-small">{{ settings.day_off }}</p>
+      </div>
+      <div>
+        <h2>Где</h2>
+        <p>{{ settings.area }}</p>
+        <p class="footer-small">Мастерская с инструментами: {{ settings.workshop_address }}. {{ settings.workshop_note }}</p>
+      </div>
+    </div>
+    <p class="footer-bottom">Мастерская Зайцева. Настройщик Аркадий Львович Зайцев.</p>
+  </div>
+</footer>
+
+<nav class="callbar" aria-label="Связаться">
+  <a class="callbar__call" href="tel:+{{ tel }}">Позвонить</a>
+  <a class="callbar__wa" href="https://wa.me/{{ wa }}">WhatsApp</a>
+</nav>
+{%- endif %}
+</body>
+</html>

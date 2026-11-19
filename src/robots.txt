@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /logo.html
+
+# TODO: replace example.ru with the real domain
+Sitemap: https://example.ru/sitemap.xml

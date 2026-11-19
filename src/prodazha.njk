@@ -1,0 +1,67 @@
+---
+layout: base.njk
+permalink: /prodazha.html
+title: Восстановленные пианино в продаже — Мастерская Зайцева
+ogTitle: Пианино в продаже — Мастерская Зайцева
+description: "Пианино, перебранные настройщиком с 36-летним стажем. Бесплатная настройка после доставки и год гарантии на механику."
+---
+{%- set tel = settings.phone | digits -%}
+{%- set wa = settings.whatsapp | digits -%}
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Пианино в продаже</h1>
+      <p>Каждый инструмент я перебрал сам: проверил деку, колки, механику, заменил что нужно и настроил. Продаю только то, за что могу&nbsp;отвечать.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="terms">
+      <div><strong>Настройка бесплатно</strong>Первая настройка после доставки, когда инструмент постоит у вас дома.</div>
+      <div><strong>Год гарантии</strong>На механику: клавиши, молоточки, педали.</div>
+      <div><strong>Доставка до квартиры</strong>Везут грузчики-партнёры, стоимость они называют отдельно.</div>
+    </div>
+
+    <div class="instruments">
+      {%- for p in collections.pianos %}
+      {%- set d = p.data %}
+      <article class="instrument{% if d.sold %} instrument--sold{% endif %}">
+        <figure class="photo">
+          {% photo d.photo, "Пианино " + d.title, "Фото " + d.title %}
+        </figure>
+        <div>
+          <h2>{{ d.title }}</h2>
+          {%- if d.subtitle %}<p class="instrument__meta">{{ d.subtitle }}</p>{% endif %}
+          {%- if d.sold %}
+          <p class="instrument__sold">Продано</p>
+          {%- else %}
+          <p class="instrument__price">{{ d.price | rub }}</p>
+          {%- endif %}
+          {%- if d.description %}<p>{{ d.description }}</p>{% endif %}
+          {%- if d.quote %}<blockquote>{{ d.quote }}</blockquote>{% endif %}
+          {%- if d.done or d.condition or d.size %}
+          <dl class="specs">
+            {%- if d.done %}<dt>Что сделано</dt><dd>{{ d.done }}</dd>{% endif %}
+            {%- if d.condition %}<dt>Состояние корпуса</dt><dd>{{ d.condition }}</dd>{% endif %}
+            {%- if d.size %}<dt>Размер и цвет</dt><dd>{{ d.size }}</dd>{% endif %}
+          </dl>
+          {%- endif %}
+          {%- if not d.sold %}
+          <div class="actions">
+            <a class="btn" href="tel:+{{ tel }}">Приехать послушать</a>
+            <a class="btn btn--quiet" href="https://wa.me/{{ wa }}?text={{ ('Здравствуйте! Интересует пианино ' + d.title + (', ' + d.subtitle if d.subtitle else '') + ', ' + (d.price | rub)) | urlencode }}">Спросить про этот инструмент</a>
+          </div>
+          {%- endif %}
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+
+  <section class="section" aria-labelledby="skoro">
+    <div class="wrap prose">
+      <h2 id="skoro">Новые инструменты появляются здесь, когда готовы</h2>
+      <p>Мастерская: {{ settings.workshop_address }}. {{ settings.workshop_note }} Приехать посмотреть и послушать можно по договорённости. Позвоните, договоримся о&nbsp;времени.</p>
+      <p>Ищете пианино ребёнку к Новому году? Звоните заранее: доставку перед праздниками лучше планировать за пару&nbsp;недель.</p>
+      <a class="btn" href="tel:+{{ tel }}">Позвонить</a>
+    </div>
+  </section>

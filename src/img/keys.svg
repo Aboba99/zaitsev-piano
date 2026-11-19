@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 100" width="140" height="100" preserveAspectRatio="none">
+  <!-- одна октава: 7 белых клавиш, 5 чёрных; повторяется по горизонтали -->
+  <rect width="140" height="100" fill="#F3ECDD"/>
+  <g stroke="#C9B994" stroke-width="1">
+    <line x1="0.5" y1="0" x2="0.5" y2="100"/>
+    <line x1="20.5" y1="0" x2="20.5" y2="100"/>
+    <line x1="40.5" y1="0" x2="40.5" y2="100"/>
+    <line x1="60.5" y1="0" x2="60.5" y2="100"/>
+    <line x1="80.5" y1="0" x2="80.5" y2="100"/>
+    <line x1="100.5" y1="0" x2="100.5" y2="100"/>
+    <line x1="120.5" y1="0" x2="120.5" y2="100"/>
+  </g>
+  <g fill="#1E1612">
+    <rect x="13" y="0" width="12" height="62" rx="1.5"/>
+    <rect x="35" y="0" width="12" height="62" rx="1.5"/>
+    <rect x="73" y="0" width="12" height="62" rx="1.5"/>
+    <rect x="94" y="0" width="12" height="62" rx="1.5"/>
+    <rect x="115" y="0" width="12" height="62" rx="1.5"/>
+  </g>
+  <rect y="96" width="140" height="4" fill="#E2D6BC"/>
+</svg>

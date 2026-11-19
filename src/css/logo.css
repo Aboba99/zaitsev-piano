@@ -1,0 +1,10 @@
+/* Лист с логотипом (logo.html) */
+.sheet { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 32px 0 56px; }
+.tile { padding: 48px 32px; display: grid; place-items: center; min-height: 280px; border: 1px solid var(--line); }
+.tile svg { width: min(420px, 100%); }
+.tile--wood { background: linear-gradient(180deg, #3A271D, #1E1612); border-color: #1E1612; }
+.tile--ivory { background: var(--paper); }
+.tile--small { min-height: 180px; }
+.tile--small svg { width: 96px; }
+.caption { margin-top: 10px; color: var(--muted); font-size: 0.95rem; }
+@media (max-width: 760px) { .sheet { grid-template-columns: 1fr; } }
