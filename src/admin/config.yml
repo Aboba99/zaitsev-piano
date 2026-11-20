@@ -4,6 +4,8 @@ backend:
   name: github
   repo: Aboba99/zaitsev-piano
   branch: main
+  base_url: https://rainbow-begonia-0c5e54.netlify.app   # свой вход через GitHub: netlify/functions/auth.mjs и callback.mjs
+  auth_endpoint: api/auth
   commit_messages:
     create: "Добавлено: {{collection}} «{{slug}}»"
     update: "Изменено: {{collection}} «{{slug}}»"
