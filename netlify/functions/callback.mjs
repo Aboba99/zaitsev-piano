@@ -1,13 +1,15 @@
 // Шаг 2: GitHub вернул код — меняем его на токен и передаём токен окну админки Decap.
 // Токен отдаётся только странице нашего же сайта (проверка origin).
 
+const js = (v) => JSON.stringify(v).replace(/</g, "\\u003c"); // символ < нельзя оставлять внутри <script>
+
 const page = (status, payload, origin) => `<!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><title>Вход в админку</title></head>
 <body><p>${status === "success" ? "Вход выполнен, окно закроется само." : "Не удалось войти. Закройте окно и попробуйте снова."}</p>
 <script>
 (function () {
-  var allowed = ${JSON.stringify(origin)};
-  var msg = "authorization:github:${status}:" + ${JSON.stringify(JSON.stringify(payload))};
+  var allowed = ${js(origin)};
+  var msg = "authorization:github:${status}:" + ${js(JSON.stringify(payload))};
   function receive(e) {
     if (e.origin !== allowed) return;
     window.opener.postMessage(msg, allowed);
@@ -32,7 +34,7 @@ const html = (body, extraHeaders = {}) =>
 
 export default async (req) => {
   const url = new URL(req.url);
-  const origin = url.origin;
+  const origin = process.env.URL || url.origin; // адрес сайта из настроек Netlify
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
   const cookie = req.headers.get("cookie") || "";

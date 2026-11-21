@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.githubusercontent.com; font-src 'self' data:; connect-src 'self' https://api.github.com https://*.githubusercontent.com https://unpkg.com; frame-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
   <title>Управление сайтом — Мастерская Зайцева</title>
   <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
 </head>
 <body>
   <!-- Decap CMS: админка сайта. Вход через GitHub, правки сохраняются в репозиторий, Netlify пересобирает сайт. -->
-  <script src="https://unpkg.com/decap-cms@3.17.3/dist/decap-cms.js"></script>
+  <script src="https://unpkg.com/decap-cms@3.17.3/dist/decap-cms.js" integrity="sha384-RWRzuHfiZSWCt3nEvG7B0v3cMgM1C2UuJmgBSL92GQh4uXmNSkbcthql/mNBqvjr" crossorigin="anonymous"></script>
 </body>
 </html>

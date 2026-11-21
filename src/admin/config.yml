@@ -93,9 +93,9 @@ collections:
         fields:
           - { name: phone, label: "Телефон", widget: string, hint: "В формате +7 (912) 345-67-89" }
           - { name: whatsapp, label: "Номер WhatsApp", widget: string, hint: "Обычно тот же, что телефон" }
-          - { name: telegram_url, label: "Ссылка на Телеграм", widget: string, required: false, hint: "Например: https://t.me/имя. Пусто — кнопки Телеграма не будет" }
+          - { name: telegram_url, label: "Ссылка на Телеграм", widget: string, required: false, pattern: ['^(https://t[.]me/[A-Za-z0-9_]+)?$', 'Ссылка вида https://t.me/имя'], hint: "Например: https://t.me/имя. Пусто — кнопки Телеграма не будет" }
           - { name: telegram_note, label: "Кто отвечает в Телеграме", widget: string, required: false }
-          - { name: avito_url, label: "Ссылка на профиль Авито", widget: string, required: false, hint: "Пусто — ссылки «Все отзывы на Авито» не будет" }
+          - { name: avito_url, label: "Ссылка на профиль Авито", widget: string, required: false, pattern: ['^(https://(www[.])?avito[.]ru/[^ ]*)?$', 'Ссылка вида https://www.avito.ru/...'], hint: "Пусто — ссылки «Все отзывы на Авито» не будет" }
           - { name: hours, label: "Часы работы (подвал сайта)", widget: string }
           - { name: hours_short, label: "Часы работы (под кнопками на главной)", widget: string }
           - { name: day_off, label: "Выходной", widget: string }

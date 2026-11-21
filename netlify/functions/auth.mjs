@@ -9,12 +9,13 @@ export default async (req) => {
 
   const url = new URL(req.url);
   const state = crypto.randomBytes(16).toString("hex");
-  const redirectUri = `${url.origin}/api/callback`;
+  const origin = process.env.URL || url.origin; // адрес сайта из настроек Netlify, не из запроса
+  const redirectUri = `${origin}/api/callback`;
 
   const gh = new URL("https://github.com/login/oauth/authorize");
   gh.searchParams.set("client_id", clientId);
   gh.searchParams.set("redirect_uri", redirectUri);
-  gh.searchParams.set("scope", url.searchParams.get("scope") || "repo");
+  gh.searchParams.set("scope", "public_repo"); // фиксированные права: только публичный репозиторий сайта
   gh.searchParams.set("state", state);
 
   return new Response(null, {
